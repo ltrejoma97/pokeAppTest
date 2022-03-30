@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/home_page"
+            android:enabled="true"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/text_home"/>
+        <item
+            android:id="@+id/pokeball_page"
+            android:enabled="true"
+            android:icon="@drawable/ic_baseline_pokeball_24"
+            android:title="@string/text_pokemon"/>
+
+        <item
+            android:id="@+id/setting_page"
+            android:enabled="true"
+            android:icon="@drawable/ic_baseline_article_24"
+            android:title="@string/text_settings"/>
+
+</menu>

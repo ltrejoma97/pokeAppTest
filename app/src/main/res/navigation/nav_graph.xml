@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.pokedex.presentation.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/versionFragment"
+        android:name="com.example.pokedex.presentation.fragments.VersionFragment"
+        android:label="fragment_version"
+        tools:layout="@layout/fragment_version" />
+    <fragment
+        android:id="@+id/searchPokemonFragment"
+        android:name="com.example.pokedex.presentation.fragments.SearchPokemonFragment"
+        android:label="fragment_search_pokemon"
+        tools:layout="@layout/fragment_search_pokemon" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.pokedex.presentation.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_homeFragment_to_searchPokemonFragment"
+            app:destination="@id/searchPokemonFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_versionFragment"
+            app:destination="@id/versionFragment" />
+    </fragment>
+</navigation>

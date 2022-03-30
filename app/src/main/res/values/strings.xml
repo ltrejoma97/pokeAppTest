@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello home fragment</string>
+    <string name="text_home">Home</string>
+    <string name="text_pokemon">Pokemon</string>
+    <string name="text_settings">Settings</string>
+</resources>
