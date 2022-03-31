@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +19,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     // TODO: Rename and change types of parameters

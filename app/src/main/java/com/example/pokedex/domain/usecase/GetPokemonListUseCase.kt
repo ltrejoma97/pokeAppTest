@@ -6,10 +6,10 @@ import retrofit2.await
 import javax.inject.Inject
 
 interface GetPokemonListUseCase {
-    suspend fun invoke() : GetPokemonListResponse?
+    suspend fun invoke() : GetPokemonListResponse
 }
 class GetPokemonListUseCaseImp @Inject constructor(val repository: GetPokemonListRepository) : GetPokemonListUseCase{
-    override suspend fun invoke(): GetPokemonListResponse? {
+    override suspend fun invoke(): GetPokemonListResponse {
         val response = repository.getPokemonList()?.await()
 
         return response
