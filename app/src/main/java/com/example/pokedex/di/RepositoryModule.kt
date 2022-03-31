@@ -1,5 +1,6 @@
 package com.example.pokedex.di
 
+import com.example.pokedex.data.EndPoints
 import com.example.pokedex.data.repositories.GetPokemonListRepository
 import com.example.pokedex.data.repositories.GetPokemonListRepositoryImp
 import dagger.Module
@@ -14,7 +15,7 @@ import dagger.hilt.components.SingletonComponent
 object RepositoryModule {
 
     @Provides
-    fun provideGetPokemonListRepository(): GetPokemonListRepository{
-        return GetPokemonListRepositoryImp()
+    fun provideGetPokemonListRepository(endPoints: EndPoints): GetPokemonListRepository{
+        return GetPokemonListRepositoryImp(endPoints)
     }
 }

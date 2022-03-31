@@ -12,9 +12,17 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val getPokemonListUseCase: GetPokemonListUseCase)
     :ViewModel() {
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            getPokemonListUseCase.invoke()
+        getPokemonList()
+    }
 
+    private fun getPokemonList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = getPokemonListUseCase.invoke()
+            if (response != null) {
+                if (response.count.isNotEmpty()) {
+                    print(response)
+                }
+            }
         }
     }
 }
