@@ -13,8 +13,8 @@ import dagger.hilt.components.SingletonComponent
 object UseCaseModule {
 
     @Provides
-    fun provideGetPokemonListUseCase() : GetPokemonListUseCase{
-        return GetPokemonListUseCaseImp()
+    fun provideGetPokemonListUseCase(repository: GetPokemonListRepository) : GetPokemonListUseCase{
+        return GetPokemonListUseCaseImp(repository)
     }
 
 
