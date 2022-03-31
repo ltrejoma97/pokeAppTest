@@ -5,4 +5,6 @@
     <string name="text_home">Home</string>
     <string name="text_pokemon">Pokemon</string>
     <string name="text_settings">Settings</string>
+    <string name="element_text">nombre de pokemon</string>
+    <string name="titlePokemonSearchLayout">Search pokemon</string>
 </resources>
