@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -27,15 +28,34 @@ class SearchPokemonFragment : Fragment() {
             {
                 print(it)
                 val pokemonAdapter = PokemonListAdapter(it.results)
-                val pokemonRecyclerView: RecyclerView = binding.pokemonRecyclerViewLayout
-                linearLayoutManager = LinearLayoutManager(context)
-                pokemonRecyclerView.layoutManager = linearLayoutManager
-                pokemonRecyclerView.adapter = pokemonAdapter
-
+                initPokemonRecyclerView(pokemonAdapter)
+                initPokemonSearchBar(pokemonAdapter)
             }
         })
     }
 
+    private fun initPokemonRecyclerView(pokemonAdapter: PokemonListAdapter) {
+        val pokemonRecyclerView: RecyclerView = binding.pokemonRecyclerViewLayout
+        linearLayoutManager = LinearLayoutManager(context)
+        pokemonRecyclerView.layoutManager = linearLayoutManager
+        pokemonRecyclerView.adapter = pokemonAdapter
+    }
+
+    private fun initPokemonSearchBar(pokemonAdapter: PokemonListAdapter) {
+        binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                pokemonAdapter.getFilter().filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                pokemonAdapter.getFilter().filter(newText);
+                return true
+            }
+
+        })
+    }
 
 
     override fun onCreateView(
@@ -52,4 +72,4 @@ class SearchPokemonFragment : Fragment() {
 
 //The recycler view have in the Fragment or activity
 //An Adapter that hold all the logic for display
-//
+//Linear layout manager for know how display the names.

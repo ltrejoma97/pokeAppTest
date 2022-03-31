@@ -3,28 +3,29 @@ package com.example.pokedex.presentation.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.TextView
+
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
 import com.example.pokedex.domain.model.entities.Pokemon
+import java.util.*
+import kotlin.collections.ArrayList
 
-class PokemonListAdapter(private val dataSet: ArrayList<Pokemon>) :
+class PokemonListAdapter(private val pokemonDataSet: ArrayList<Pokemon>) :
     RecyclerView.Adapter<PokemonListAdapter.PokemonViewHolder>() {
-
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
+    val initialPokemonDataList = ArrayList<Pokemon>().apply {
+        pokemonDataSet?.let { addAll(it) }
+    }
     class PokemonViewHolder( view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
+        private val pokemonNameTextView: TextView = view.findViewById(R.id.pokemonName)
 
         init {
             // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(R.id.pokemonName)
 
         }
         fun bind( pokemon : Pokemon){
-            textView.text = pokemon.name
+            pokemonNameTextView.text = pokemon.name
         }
     }
 
@@ -42,11 +43,42 @@ class PokemonListAdapter(private val dataSet: ArrayList<Pokemon>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val pokemonFromTheList =  dataSet[position]
+        val pokemonFromTheList = pokemonDataSet[position]
         pokemonViewHolder.bind(pokemonFromTheList)
+        //Copy of data for perform search
+
+    }
+    // Return the size of your dataset (invoked by the layout manager)
+    override fun getItemCount() = pokemonDataSet.size
+
+    fun getFilter(): Filter {
+        return pokemonFilter
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = dataSet.size
+    private val pokemonFilter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList: ArrayList<Pokemon> = ArrayList()
+            if (constraint == null || constraint.isEmpty()) {
+                initialPokemonDataList.let { filteredList.addAll(it) }
+            } else {
+                val query = constraint.toString().trim().toLowerCase()
+                initialPokemonDataList.forEach {
+                    if (it.name.lowercase(Locale.ROOT).contains(query)) {
+                        filteredList.add(it)
+                    }
+                }
+            }
+            val results = FilterResults()
+            results.values = filteredList
+            return results
+        }
 
-}
+        override fun publishResults(p0: CharSequence?, resultOfFilter: FilterResults?) {
+            if (resultOfFilter?.values is ArrayList<*>) {
+                pokemonDataSet.clear()
+                pokemonDataSet.addAll(resultOfFilter.values as ArrayList<Pokemon>)
+                notifyDataSetChanged()
+            }
+        }
+        }
+    }
