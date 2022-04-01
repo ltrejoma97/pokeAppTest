@@ -5,25 +5,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.TextView
-
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
 import com.example.pokedex.domain.model.entities.Pokemon
 import java.util.*
-import kotlin.collections.ArrayList
 
-class PokemonListAdapter(private val pokemonDataSet: ArrayList<Pokemon>) :
+class PokemonListAdapter(private val pokemonDataSet: ArrayList<Pokemon>, val pokemonClickListenerContract : PokemonFragmentContract ) :
     RecyclerView.Adapter<PokemonListAdapter.PokemonViewHolder>() {
-    val initialPokemonDataList = ArrayList<Pokemon>().apply {
-        pokemonDataSet?.let { addAll(it) }
+    val initialPokemonDataListForFilter = ArrayList<Pokemon>().apply {
+        pokemonDataSet.let { addAll(it) }
     }
-    class PokemonViewHolder( view: View) : RecyclerView.ViewHolder(view) {
-        private val pokemonNameTextView: TextView = view.findViewById(R.id.pokemonName)
 
-        init {
-            // Define click listener for the ViewHolder's View.
+    interface PokemonFragmentContract{
+        fun notifyPokemonSelected(urlOfPokemon : String)
+    }
 
-        }
+
+    class PokemonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+         val pokemonNameTextView: TextView = view.findViewById(R.id.pokemonName)
+
         fun bind( pokemon : Pokemon){
             pokemonNameTextView.text = pokemon.name
         }
@@ -46,6 +46,10 @@ class PokemonListAdapter(private val pokemonDataSet: ArrayList<Pokemon>) :
         val pokemonFromTheList = pokemonDataSet[position]
         pokemonViewHolder.bind(pokemonFromTheList)
         //Copy of data for perform search
+        //Listener for click on pokemon
+        pokemonViewHolder.pokemonNameTextView.setOnClickListener {
+            pokemonClickListenerContract.notifyPokemonSelected(pokemonFromTheList.url)
+        }
 
     }
     // Return the size of your dataset (invoked by the layout manager)
@@ -59,10 +63,10 @@ class PokemonListAdapter(private val pokemonDataSet: ArrayList<Pokemon>) :
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val filteredList: ArrayList<Pokemon> = ArrayList()
             if (constraint == null || constraint.isEmpty()) {
-                initialPokemonDataList.let { filteredList.addAll(it) }
+                initialPokemonDataListForFilter.let { filteredList.addAll(it) }
             } else {
                 val query = constraint.toString().trim().toLowerCase()
-                initialPokemonDataList.forEach {
+                initialPokemonDataListForFilter.forEach {
                     if (it.name.lowercase(Locale.ROOT).contains(query)) {
                         filteredList.add(it)
                     }

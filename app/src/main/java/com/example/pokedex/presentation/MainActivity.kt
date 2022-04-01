@@ -62,5 +62,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        if (navController.currentDestination?.label == "fragment_detail_pokemon")
+        {
+            navController.navigateUp()
+        }
     }
 }

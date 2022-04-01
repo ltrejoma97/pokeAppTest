@@ -22,8 +22,8 @@ object RepositoryModule {
     }
 
     @Provides
-    fun provideGetPokemonRepository() : GetPokemonRepository{
-        return GetPokemonRepositoryImp()
+    fun provideGetPokemonRepository(endPoints: EndPoints) : GetPokemonRepository{
+        return GetPokemonRepositoryImp(endPoints)
     }
 
 }

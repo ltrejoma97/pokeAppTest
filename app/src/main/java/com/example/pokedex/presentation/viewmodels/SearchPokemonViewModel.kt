@@ -20,8 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchPokemonViewModel @Inject constructor(
-    private val getPokemonListUseCase: GetPokemonListUseCase,
-    private val getPokemonUseCase : GetPokemonUseCase) : ViewModel() {
+    private val getPokemonListUseCase: GetPokemonListUseCase) : ViewModel() {
 
     private var _pokemonList =  MutableLiveData<GetPokemonListResponse>()
     val pokemonList : LiveData<GetPokemonListResponse>
@@ -29,21 +28,15 @@ class SearchPokemonViewModel @Inject constructor(
 
     init{
         getPokemonList()
-        getPokemon()
     }
 
-    private fun getPokemon() {
-        viewModelScope.launch(Dispatchers.IO){
-            getPokemonUseCase.invoke()
-
-        }
-    }
 
     private fun getPokemonList() {
         viewModelScope.launch(Dispatchers.IO) {
             val getPokemonResponse = getPokemonListUseCase.invoke()
             if (getPokemonResponse.count.isNotEmpty()) {
-                _pokemonList.postValue(getPokemonResponse)                }
+                _pokemonList.postValue(getPokemonResponse)
+            }
         }
     }
 }

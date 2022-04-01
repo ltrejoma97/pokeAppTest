@@ -19,7 +19,11 @@
         android:id="@+id/searchPokemonFragment"
         android:name="com.example.pokedex.presentation.fragments.SearchPokemonFragment"
         android:label="fragment_search_pokemon"
-        tools:layout="@layout/fragment_search_pokemon" />
+        tools:layout="@layout/fragment_search_pokemon" >
+        <action
+            android:id="@+id/action_searchPokemonFragment_to_detailPokemonFragment"
+            app:destination="@id/detailPokemonFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.pokedex.presentation.fragments.HomeFragment"
@@ -36,4 +40,9 @@
             android:id="@+id/action_homeFragment_to_versionFragment"
             app:destination="@id/versionFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailPokemonFragment"
+        android:name="com.example.pokedex.presentation.fragments.DetailPokemonFragment"
+        android:label="fragment_detail_pokemon"
+        tools:layout="@layout/fragment_detail_pokemon" />
 </navigation>

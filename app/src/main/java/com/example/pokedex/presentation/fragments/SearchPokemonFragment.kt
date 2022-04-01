@@ -5,18 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentSearchPokemonBinding
 import com.example.pokedex.presentation.adapter.PokemonListAdapter
 import com.example.pokedex.presentation.viewmodels.SearchPokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchPokemonFragment : Fragment() {
+class SearchPokemonFragment : Fragment(), PokemonListAdapter.PokemonFragmentContract {
     lateinit var binding : FragmentSearchPokemonBinding
     private val viewModel by viewModels<SearchPokemonViewModel>()
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -27,7 +31,7 @@ class SearchPokemonFragment : Fragment() {
             if (it != null)
             {
                 print(it)
-                val pokemonAdapter = PokemonListAdapter(it.results)
+                val pokemonAdapter = PokemonListAdapter(it.results,this)
                 initPokemonRecyclerView(pokemonAdapter)
                 initPokemonSearchBar(pokemonAdapter)
             }
@@ -66,6 +70,11 @@ class SearchPokemonFragment : Fragment() {
         return  binding.root
     }
 
+    override fun notifyPokemonSelected(urlOfPokemon: String) {
+        // Use the Kotlin extension in the fragment-ktx artifact
+        this.setFragmentResult("pokemonUrl", bundleOf("bundleKey" to urlOfPokemon))
+        this.findNavController().navigate(R.id.action_searchPokemonFragment_to_detailPokemonFragment)
+    }
 
 
 }
