@@ -15,7 +15,8 @@
 
         <ProgressBar
             android:id="@+id/determinateBar"
-            style="@android:style/Widget.ProgressBar"
+            style="@android:style/Widget.Material.ProgressBar.Large"
+            android:indeterminateTint="@color/purple_500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +35,6 @@
             android:id="@+id/nameOfPokemon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/pokemon"
             android:textSize="24sp"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="10dp"/>
@@ -50,7 +50,7 @@
         <TextView
             android:id="@+id/abilityOfPokemon"
             android:text="@string/ability_pokemon"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
         <TextView
             android:id="@+id/heightOfPokemon"
             android:text="@string/height_of_pokemon"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
         <TextView
             android:id="@+id/baseExperience"
             android:text="@string/base_experience"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
         <TextView
             android:id="@+id/weightOfPokemon"
             android:text="@string/weight_of_pokemon"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

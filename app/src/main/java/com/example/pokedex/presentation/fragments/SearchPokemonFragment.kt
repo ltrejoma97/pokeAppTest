@@ -52,9 +52,9 @@ class SearchPokemonFragment : Fragment(), PokemonListAdapter.PokemonFragmentCont
         viewModel.isProgressBarDisplayed.observe(this, Observer { isProgressBarDisplayed : Boolean ->
             if (isProgressBarDisplayed)
             {
-                binding.determinateBar.visibility = View.VISIBLE
+                binding.progressBarContainer.visibility = View.VISIBLE
             }else{
-                binding.determinateBar.visibility = View.GONE
+                binding.progressBarContainer.visibility = View.GONE
             }
         })
     }

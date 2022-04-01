@@ -9,7 +9,6 @@ import com.example.pokedex.R
 import com.example.pokedex.databinding.ActivityMainBinding
 import com.example.pokedex.presentation.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -43,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.home_page -> {
+                    checkIfCurrentDestinationIsDetatilFragment()
                     navController.navigateUp()
                     true
                 }
@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.setting_page ->{
+                    checkIfCurrentDestinationIsDetatilFragment()
+
                     navController.navigateUp()
                     navController.navigate(R.id.action_homeFragment_to_settingsFragment)
                     true
@@ -62,8 +64,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (navController.currentDestination?.label == "fragment_detail_pokemon")
-        {
+        checkIfCurrentDestinationIsDetatilFragment()
+    }
+
+    private fun checkIfCurrentDestinationIsDetatilFragment() {
+        if (navController.currentDestination?.label == "fragment_detail_pokemon") {
             navController.navigateUp()
         }
     }

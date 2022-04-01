@@ -33,11 +33,11 @@ class DetailPokemonFragment : Fragment() {
 
     private fun renderTheUi(pokemonData: GetPokemonResponse?) {
         if (pokemonData != null) {
-            binding.abilityOfPokemon.text =   pokemonData.abilities[0].ability.name
+            binding.abilityOfPokemon.text =   binding.abilityOfPokemon.text .toString()+ pokemonData.abilities[0].ability.name.capitalize()
             binding.baseExperience.text = binding.baseExperience.text.toString() +   pokemonData.base_experience.toString()
             binding.heightOfPokemon.text = binding.baseExperience.text .toString() + pokemonData.height.toString()
             binding.weightOfPokemon.text= binding.weightOfPokemon.text.toString() + pokemonData.weight.toString()
-            binding.nameOfPokemon.text = binding.nameOfPokemon.text.toString()  + pokemonData.name.capitalize()
+            binding.nameOfPokemon.text = pokemonData.name.capitalize()
             Picasso.get().load(pokemonData.sprites.front_default).into(binding.frontImageOfPokemon);
             binding.progressBarContainer.visibility = View.GONE
 
