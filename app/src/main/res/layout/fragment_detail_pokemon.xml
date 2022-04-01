@@ -2,63 +2,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".presentation.fragments.DetailPokemonFragment">
 
-    <TextView
-        android:id="@+id/nameOfPokemon"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/progressBarContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/pokemon"
-        android:textSize="24sp"
-         android:layout_marginVertical="8dp"
-        android:layout_marginHorizontal="10dp"/>
+        android:layout_height="match_parent"
+        >
 
-    <ImageView
+        <ProgressBar
+            android:id="@+id/determinateBar"
+            style="@android:style/Widget.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        android:id="@+id/frontImageOfPokemon"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="12dp"
-        android:src="@drawable/ic_baseline_pokeball_24"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/abilityOfPokemon"
-        android:text="@string/ability_pokemon"
-        android:textSize="12sp"
-        android:layout_marginTop="8dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp" />
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/heightOfPokemon"
-        android:text="@string/height_of_pokemon"
-        android:textSize="12sp"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        />
-    <TextView
-        android:id="@+id/baseExperience"
-        android:text="@string/base_experience"
-        android:textSize="12sp"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        />
-    <TextView
-        android:id="@+id/weightOfPokemon"
-        android:text="@string/weight_of_pokemon"
-        android:textSize="12sp"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        />
+        <TextView
+            android:id="@+id/nameOfPokemon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pokemon"
+            android:textSize="24sp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="10dp"/>
+
+        <ImageView
+
+            android:id="@+id/frontImageOfPokemon"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="12dp"
+            android:src="@drawable/ic_baseline_pokeball_24"/>
+
+        <TextView
+            android:id="@+id/abilityOfPokemon"
+            android:text="@string/ability_pokemon"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp" />
+
+        <TextView
+            android:id="@+id/heightOfPokemon"
+            android:text="@string/height_of_pokemon"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            />
+        <TextView
+            android:id="@+id/baseExperience"
+            android:text="@string/base_experience"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            />
+        <TextView
+            android:id="@+id/weightOfPokemon"
+            android:text="@string/weight_of_pokemon"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            />
+
+
+
+    </LinearLayout>
+
 
 
 

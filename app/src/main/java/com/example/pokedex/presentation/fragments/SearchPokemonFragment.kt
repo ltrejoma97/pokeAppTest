@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
 import com.example.pokedex.databinding.FragmentSearchPokemonBinding
+import com.example.pokedex.domain.model.entities.GetPokemonListResponse
 import com.example.pokedex.presentation.adapter.PokemonListAdapter
 import com.example.pokedex.presentation.viewmodels.SearchPokemonViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,15 +28,46 @@ class SearchPokemonFragment : Fragment(), PokemonListAdapter.PokemonFragmentCont
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.pokemonList.observe(this, Observer {
-            if (it != null)
+        initObservers()
+    }
+
+    private fun handlePokemonDataCatched() {
+        if (viewModel.pokemonList.value !=null )
+        {
+            createPokemonAdapterAndUi(viewModel.pokemonList.value!!)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handlePokemonDataCatched()
+
+    }
+
+    private fun initObservers() {
+        viewModel.pokemonList.observe(this, Observer {pokemonDataList : GetPokemonListResponse ->
+            hideProgressBar()
+            createPokemonAdapterAndUi(pokemonDataList)
+        })
+        viewModel.isProgressBarDisplayed.observe(this, Observer { isProgressBarDisplayed : Boolean ->
+            if (isProgressBarDisplayed)
             {
-                print(it)
-                val pokemonAdapter = PokemonListAdapter(it.results,this)
-                initPokemonRecyclerView(pokemonAdapter)
-                initPokemonSearchBar(pokemonAdapter)
+                binding.determinateBar.visibility = View.VISIBLE
+            }else{
+                binding.determinateBar.visibility = View.GONE
             }
         })
+    }
+
+    private fun createPokemonAdapterAndUi(it: GetPokemonListResponse) {
+        val pokemonAdapter = PokemonListAdapter(it.results, this)
+        initPokemonRecyclerView(pokemonAdapter)
+        initPokemonSearchBar(pokemonAdapter)
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBarContainer.visibility=View.GONE
+        binding.searchContainer.visibility = View.VISIBLE
     }
 
     private fun initPokemonRecyclerView(pokemonAdapter: PokemonListAdapter) {

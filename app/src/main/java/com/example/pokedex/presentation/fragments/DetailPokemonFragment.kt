@@ -39,6 +39,7 @@ class DetailPokemonFragment : Fragment() {
             binding.weightOfPokemon.text= binding.weightOfPokemon.text.toString() + pokemonData.weight.toString()
             binding.nameOfPokemon.text = binding.nameOfPokemon.text.toString()  + pokemonData.name.capitalize()
             Picasso.get().load(pokemonData.sprites.front_default).into(binding.frontImageOfPokemon);
+            binding.progressBarContainer.visibility = View.GONE
 
         }
 

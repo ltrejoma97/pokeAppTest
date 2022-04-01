@@ -26,17 +26,30 @@ class SearchPokemonViewModel @Inject constructor(
     val pokemonList : LiveData<GetPokemonListResponse>
         get() =  _pokemonList
 
+    private var _isProgressBarDisplayed = MutableLiveData <Boolean>()
+    val  isProgressBarDisplayed : LiveData<Boolean>
+        get() = _isProgressBarDisplayed
+
     init{
         getPokemonList()
     }
 
 
     private fun getPokemonList() {
+        showProgressBar()
         viewModelScope.launch(Dispatchers.IO) {
             val getPokemonResponse = getPokemonListUseCase.invoke()
             if (getPokemonResponse.count.isNotEmpty()) {
                 _pokemonList.postValue(getPokemonResponse)
+                hideProgressBar()
             }
         }
+    }
+
+    private fun showProgressBar(){
+        _isProgressBarDisplayed.value = true
+    }
+    private fun hideProgressBar(){
+        _isProgressBarDisplayed.postValue(false)
     }
 }
