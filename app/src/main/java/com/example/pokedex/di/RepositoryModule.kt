@@ -3,6 +3,8 @@ package com.example.pokedex.di
 import com.example.pokedex.data.EndPoints
 import com.example.pokedex.data.repositories.GetPokemonListRepository
 import com.example.pokedex.data.repositories.GetPokemonListRepositoryImp
+import com.example.pokedex.data.repositories.GetPokemonRepository
+import com.example.pokedex.data.repositories.GetPokemonRepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,4 +20,10 @@ object RepositoryModule {
     fun provideGetPokemonListRepository(endPoints: EndPoints): GetPokemonListRepository{
         return GetPokemonListRepositoryImp(endPoints)
     }
+
+    @Provides
+    fun provideGetPokemonRepository() : GetPokemonRepository{
+        return GetPokemonRepositoryImp()
+    }
+
 }

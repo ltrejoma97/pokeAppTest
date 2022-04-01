@@ -1,6 +1,7 @@
 package com.example.pokedex.di
 
 import com.example.pokedex.data.repositories.GetPokemonListRepository
+import com.example.pokedex.data.repositories.GetPokemonRepository
 import com.example.pokedex.domain.usecase.GetPokemonListUseCase
 import com.example.pokedex.domain.usecase.GetPokemonListUseCaseImp
 import com.example.pokedex.domain.usecase.GetPokemonUseCase
@@ -20,8 +21,8 @@ object UseCaseModule {
     }
 
     @Provides
-    fun providesGetPokemonUseCase() : GetPokemonUseCase{
-        return GetPokemonUseCaseImp()
+    fun providesGetPokemonUseCase(repository : GetPokemonRepository) : GetPokemonUseCase{
+        return GetPokemonUseCaseImp(repository)
     }
 
 
