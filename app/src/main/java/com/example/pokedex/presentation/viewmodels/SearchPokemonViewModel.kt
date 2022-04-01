@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedex.domain.model.entities.GetPokemonListResponse
 import com.example.pokedex.domain.usecase.GetPokemonListUseCase
+import com.example.pokedex.domain.usecase.GetPokemonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,15 +19,24 @@ import javax.inject.Inject
 //de cambios de configuración, como las rotaciones de pantallas.
 
 @HiltViewModel
-class SearchPokemonViewModel @Inject constructor(private val getPokemonListUseCase: GetPokemonListUseCase) : ViewModel() {
+class SearchPokemonViewModel @Inject constructor(
+    private val getPokemonListUseCase: GetPokemonListUseCase,
+    private val getPokemonUseCase : GetPokemonUseCase) : ViewModel() {
 
     private var _pokemonList =  MutableLiveData<GetPokemonListResponse>()
     val pokemonList : LiveData<GetPokemonListResponse>
         get() =  _pokemonList
 
     init{
-        println("hola me creaste search pokemon viewmodel")
         getPokemonList()
+        getPokemon()
+    }
+
+    private fun getPokemon() {
+        viewModelScope.launch(Dispatchers.IO){
+            getPokemonUseCase.invoke()
+
+        }
     }
 
     private fun getPokemonList() {
